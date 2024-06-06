@@ -1,22 +1,28 @@
-package br.com.cleanarch.domain.customer.event.event;
+package br.com.cleanarch.domain.customer.event.event.created;
 
-import br.com.cleanarch.domain.customer.entity.Customer;
 import br.com.cleanarch.domain.shared.event.IEvent;
 
 import java.time.Instant;
 import java.time.ZoneOffset;
 import java.util.UUID;
 
-public class CustomerChangedAddressEvent implements IEvent<Customer> {
+public class CustomerCreatedEvent implements IEvent<CustomerCreatedRecord> {
 
     private final String traceId;
-    private final Customer payload;
+    private final CustomerCreatedRecord payload;
     private final Instant instantCreated;
+    private final String eventName;
 
-    public CustomerChangedAddressEvent(final Customer payload) {
+    public CustomerCreatedEvent(final CustomerCreatedRecord payload) {
+        this.eventName = this.getClass().getSimpleName().toLowerCase();
         this.traceId = UUID.randomUUID().toString();
         this.instantCreated = Instant.now().atOffset(ZoneOffset.UTC).toInstant();
         this.payload = payload;
+    }
+
+    @Override
+    public String eventName() {
+        return this.eventName;
     }
 
     @Override
@@ -30,7 +36,7 @@ public class CustomerChangedAddressEvent implements IEvent<Customer> {
     }
 
     @Override
-    public Customer payload() {
+    public CustomerCreatedRecord payload() {
         return this.payload;
     }
 }

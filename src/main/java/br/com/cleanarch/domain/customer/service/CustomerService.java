@@ -2,9 +2,6 @@ package br.com.cleanarch.domain.customer.service;
 
 import br.com.cleanarch.domain.customer.entity.Customer;
 import br.com.cleanarch.domain.customer.event.dispatcher.CustomerEventDispatcher;
-import br.com.cleanarch.domain.customer.event.event.CustomerChangedAddressEvent;
-import br.com.cleanarch.domain.customer.event.event.CustomerChangedAllEvent;
-import br.com.cleanarch.domain.customer.event.event.CustomerCreatedEvent;
 import br.com.cleanarch.domain.customer.repository.ICustomerRepository;
 import br.com.cleanarch.domain.customer.valueobject.AddressVO;
 import br.com.cleanarch.domain.shared.entity.exception.DomainException;
@@ -12,7 +9,6 @@ import br.com.cleanarch.domain.shared.service.IService;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.UUID;
 
 public class CustomerService implements IService {
 
@@ -28,22 +24,23 @@ public class CustomerService implements IService {
 
     public Customer notifyCreated(final String name, final String street, final String city, final String state, final String zipCode) {
 
-        final var customer = new Customer(UUID.randomUUID().toString(), name, street, city, state, zipCode);
+        final var customer = new Customer();
+        customer.create(name, street, city, state, zipCode);
 
         this.repository.create(customer);
 
-        this.dispatcher.notify(new CustomerCreatedEvent(customer));
+//        this.dispatcher.notify(new CustomerCreatedEvent(new CustomerCreatedRecord(customer.getId(), customer.getTenantId())));
 
         return customer;
     }
 
     public Customer notifyChangeAddress(final Customer customer, final AddressVO address) {
 
-        customer.changeAddress(address);
+        customer.changeAddress(address.getStreet(), address.getState(), address.getCity(), address.getZipCode());
 
         this.repository.update(customer);
 
-        this.dispatcher.notify(new CustomerChangedAddressEvent(customer));
+//        this.dispatcher.notify(new CustomerChangedAddressEvent(customer));
 
         return customer;
     }
@@ -64,7 +61,7 @@ public class CustomerService implements IService {
 
         this.repository.update(customer);
 
-        this.dispatcher.notify(new CustomerChangedAllEvent(customer));
+//        this.dispatcher.notify(new CustomerChangedAllEvent(customer));
 
         return customer;
 

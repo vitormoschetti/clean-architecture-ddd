@@ -23,7 +23,8 @@ public class AddressVO extends BaseEntity implements IValueObject {
         this.validate();
     }
 
-    public void validate() {
+    @Override
+    protected void validate() {
         if (Objects.isNull(this.street) || this.street.isBlank())
             this.addMessage(new DomainNotificationError("Street is required", this.getClass().getSimpleName()));
         if (Objects.isNull(this.city) || this.city.isBlank())

@@ -5,7 +5,7 @@ import java.util.Set;
 
 public class DomainNotification implements INotification {
 
-    private final Set<INotificationError> errors;
+    private Set<INotificationError> errors;
 
     public DomainNotification() {
         this.errors = new HashSet<>();

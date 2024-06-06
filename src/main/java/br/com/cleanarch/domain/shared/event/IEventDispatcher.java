@@ -2,7 +2,7 @@ package br.com.cleanarch.domain.shared.event;
 
 import java.util.List;
 
-public interface IEventDispatcher<T> {
+public interface IEventDispatcher<T extends IRecord> {
 
     void notify(IEvent<T> event);
 
