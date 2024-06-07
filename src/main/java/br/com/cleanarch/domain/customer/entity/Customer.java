@@ -5,7 +5,9 @@ import br.com.cleanarch.domain.shared.entity.BaseEntity;
 import br.com.cleanarch.domain.shared.entity.IAggregateRoot;
 import br.com.cleanarch.domain.shared.notification.DomainNotification;
 import br.com.cleanarch.domain.shared.notification.DomainNotificationError;
+import br.com.cleanarch.domain.shared.valueobject.AuditTimestamps;
 
+import java.time.Instant;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -17,9 +19,11 @@ public class Customer extends BaseEntity implements IAggregateRoot {
     private AddressVO address;
     private Boolean active;
     private Long rewardPoints;
+    private final AuditTimestamps audit;
 
     public Customer() {
         super(new DomainNotification());
+        this.audit = new AuditTimestamps();
     }
 
     public void create(final String name, final String street, final String city, final String state, final String zipCode) {
@@ -33,25 +37,30 @@ public class Customer extends BaseEntity implements IAggregateRoot {
 
     public void changeName(final String name) {
         this.name = name;
+        this.audit.updateNow();
         this.validate();
     }
 
     public void changeAddress(final String street, final String state, final String city, final String zipCode) {
         this.address = new AddressVO(street, city, state, zipCode);
+        this.audit.updateNow();
         this.validate();
     }
 
     public void changeAll(final String name, final String street, final String state, final String city, final String zipCode) {
         this.changeName(name);
         this.changeAddress(street, state, city, zipCode);
+        this.audit.updateNow();
     }
 
     public void activate() {
         this.active = Boolean.TRUE;
+        this.audit.updateNow();
     }
 
     public void deactivate() {
         this.active = Boolean.FALSE;
+        this.audit.updateNow();
     }
 
     public void addRewardPoints(final Long points) {
@@ -59,6 +68,7 @@ public class Customer extends BaseEntity implements IAggregateRoot {
             this.addMessage(new DomainNotificationError("Reward Points must be greater equal zero", this.getClass().getSimpleName()));
 
         this.rewardPoints += points;
+        this.audit.updateNow();
     }
 
     @Override
@@ -91,6 +101,14 @@ public class Customer extends BaseEntity implements IAggregateRoot {
 
     public AddressVO getAddress() {
         return this.address;
+    }
+
+    public Instant getCreatedAt() {
+        return this.audit.getCreatedAt();
+    }
+
+    public Instant getUpdatedAt() {
+        return this.audit.getUpdatedAt();
     }
 
     @Override

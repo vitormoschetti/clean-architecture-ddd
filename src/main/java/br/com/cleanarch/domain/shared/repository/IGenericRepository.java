@@ -10,7 +10,7 @@ public interface IGenericRepository<T extends IAggregateRoot> {
 
     void update(final T entity);
 
-    T findById(final String id);
+    T findById(final Long id);
 
     List<T> findAll();
 

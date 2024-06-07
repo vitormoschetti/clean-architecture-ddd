@@ -9,6 +9,7 @@ public class AuditTimestamps {
     private Instant updatedAt;
 
     public AuditTimestamps() {
+        createNow();
     }
 
     public AuditTimestamps(Instant createdAt, Instant updatedAt) {
@@ -24,7 +25,7 @@ public class AuditTimestamps {
         return updatedAt;
     }
 
-    public void createNow() {
+    private void createNow() {
         this.createdAt = Instant.now().atOffset(ZoneOffset.UTC).toInstant();
     }
 

@@ -1,4 +1,4 @@
-package br.com.cleanarch.domain.customer.event.event.changeall;
+package br.com.cleanarch.domain.customer.event.changedaddress;
 
 import br.com.cleanarch.domain.shared.event.IEvent;
 
@@ -6,14 +6,14 @@ import java.time.Instant;
 import java.time.ZoneOffset;
 import java.util.UUID;
 
-public class CustomerChangedAllEvent implements IEvent<CustomerChangedAllRecord> {
+public class CustomerChangedAddressEvent implements IEvent<CustomerChangedAddressRecord> {
 
     private final String eventName;
     private final String traceId;
-    private final CustomerChangedAllRecord payload;
+    private final CustomerChangedAddressRecord payload;
     private final Instant instantCreated;
 
-    public CustomerChangedAllEvent(final CustomerChangedAllRecord payload) {
+    public CustomerChangedAddressEvent(final CustomerChangedAddressRecord payload) {
         this.eventName = this.getClass().getSimpleName().toLowerCase();
         this.traceId = UUID.randomUUID().toString();
         this.instantCreated = Instant.now().atOffset(ZoneOffset.UTC).toInstant();
@@ -36,7 +36,7 @@ public class CustomerChangedAllEvent implements IEvent<CustomerChangedAllRecord>
     }
 
     @Override
-    public CustomerChangedAllRecord payload() {
+    public CustomerChangedAddressRecord payload() {
         return this.payload;
     }
 }

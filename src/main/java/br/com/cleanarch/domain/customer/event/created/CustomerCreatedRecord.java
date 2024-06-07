@@ -1,4 +1,4 @@
-package br.com.cleanarch.domain.customer.event.event.created;
+package br.com.cleanarch.domain.customer.event.created;
 
 import br.com.cleanarch.domain.shared.event.IRecord;
 

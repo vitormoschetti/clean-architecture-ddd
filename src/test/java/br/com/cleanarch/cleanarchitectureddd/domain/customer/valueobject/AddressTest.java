@@ -16,16 +16,26 @@ public class AddressTest {
     @DisplayName("should throw domain exception when street is empty")
     public void shouldThrowDomainExceptionWhenStreetEmpty() {
 
-        final var addressVO = new AddressVO("", "", "", "");
+        final var addressVOEmpty = new AddressVO("", "", "", "");
+        final var addressVONull = new AddressVO(null, null, null, null);
 
-        assertTrue(addressVO.hasErrors());
-        assertEquals(4, addressVO.getMessages().size());
+        assertTrue(addressVOEmpty.hasErrors());
+        assertEquals(4, addressVOEmpty.getMessages().size());
         assertEquals(Set.of(
                 new DomainNotificationError("Street is required", AddressVO.class.getSimpleName()),
                 new DomainNotificationError("City is required", AddressVO.class.getSimpleName()),
                 new DomainNotificationError("State is required", AddressVO.class.getSimpleName()),
                 new DomainNotificationError("ZipCode is required", AddressVO.class.getSimpleName())
-        ), addressVO.getMessages());
+        ), addressVOEmpty.getMessages());
+
+        assertTrue(addressVONull.hasErrors());
+        assertEquals(4, addressVONull.getMessages().size());
+        assertEquals(Set.of(
+                new DomainNotificationError("Street is required", AddressVO.class.getSimpleName()),
+                new DomainNotificationError("City is required", AddressVO.class.getSimpleName()),
+                new DomainNotificationError("State is required", AddressVO.class.getSimpleName()),
+                new DomainNotificationError("ZipCode is required", AddressVO.class.getSimpleName())
+        ), addressVONull.getMessages());
 
 
     }

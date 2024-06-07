@@ -1,4 +1,4 @@
-package br.com.cleanarch.domain.customer.event.event.changedaddress;
+package br.com.cleanarch.domain.customer.event.changedaddress;
 
 import br.com.cleanarch.domain.customer.valueobject.AddressVO;
 import br.com.cleanarch.domain.shared.event.IRecord;
