@@ -15,8 +15,7 @@ public class CustomerService implements ICustomerService {
         this.repository = repository;
     }
 
-    @Override
-    public Customer notifyCreated(final String name, final String street, final String city, final String state, final String zipCode) {
+    public Customer create(final String name, final String street, final String city, final String state, final String zipCode) {
 
         final var customer = new Customer();
         customer.create(name, street, city, state, zipCode);
@@ -27,7 +26,7 @@ public class CustomerService implements ICustomerService {
     }
 
     @Override
-    public Customer notifyChangeAddress(final Long id, final String street, final String city, final String state, final String zipCode) {
+    public Customer changeAddress(final Long id, final String street, final String city, final String state, final String zipCode) {
 
         final var customer = this.repository.findById(id);
 
@@ -44,8 +43,8 @@ public class CustomerService implements ICustomerService {
     }
 
     @Override
-    public Customer notifyUpdate(final Long id, final String name, final String street,
-                                 final String state, final String city, final String zipCode) {
+    public Customer update(final Long id, final String name, final String street,
+                           final String state, final String city, final String zipCode) {
 
         final var customer = this.findById(id);
 

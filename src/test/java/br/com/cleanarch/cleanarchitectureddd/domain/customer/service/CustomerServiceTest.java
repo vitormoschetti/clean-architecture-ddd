@@ -35,7 +35,7 @@ class CustomerServiceTest extends BaseTeste {
         doNothing().when(repository).create(any(Customer.class));
 
         //execution
-        final var customer = customerService.notifyCreated("test", "street", "city", "state", "zipcode");
+        final var customer = customerService.create("test", "street", "city", "state", "zipcode");
 
         //validation
 
@@ -59,7 +59,7 @@ class CustomerServiceTest extends BaseTeste {
         doNothing().when(repository).update(any(Customer.class));
 
         //execution
-        final var customer = this.customerService.notifyChangeAddress(1L, "foo", "foo",
+        final var customer = this.customerService.changeAddress(1L, "foo", "foo",
                 "foo", "foo");
 
         //validation
@@ -71,6 +71,31 @@ class CustomerServiceTest extends BaseTeste {
         Assertions.assertEquals(customer.isActive(), customerMock.isActive());
 
     }
+
+    @Test
+    @DisplayName("should changed all")
+    void shouldChangedAll() {
+
+        //scenario
+        final var customerMock = this.buildValidCustomer();
+
+        when(repository.findById(anyLong())).thenReturn(customerMock);
+
+        doNothing().when(repository).update(any(Customer.class));
+
+        //execution
+        final var customer = this.customerService.update(1L, "foo", "foo",
+                "foo", "foo", "foo");
+
+        //validation
+        Assertions.assertEquals(customer.getTenantId(), customerMock.getTenantId());
+        Assertions.assertEquals(customer.getName(), customerMock.getName());
+        Assertions.assertEquals(customer.getAddress(), customerMock.getAddress());
+        Assertions.assertEquals(customer.getRewardPoints(), customerMock.getRewardPoints());
+        Assertions.assertEquals(customer.isActive(), customerMock.isActive());
+
+    }
+
 
     @Test
     @DisplayName("Should find by id")
