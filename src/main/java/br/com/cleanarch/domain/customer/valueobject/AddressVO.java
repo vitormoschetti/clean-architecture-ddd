@@ -26,13 +26,13 @@ public class AddressVO extends BaseEntity implements IValueObject {
     @Override
     protected void validate() {
         if (Objects.isNull(this.street) || this.street.isBlank())
-            this.addMessage(new DomainNotificationError("Street is required", this.getClass().getSimpleName()));
+            this.addMessage(new DomainNotificationError("Street is required"));
         if (Objects.isNull(this.city) || this.city.isBlank())
-            this.addMessage(new DomainNotificationError("City is required", this.getClass().getSimpleName()));
+            this.addMessage(new DomainNotificationError("City is required"));
         if (Objects.isNull(this.state) || this.state.isBlank())
-            this.addMessage(new DomainNotificationError("State is required", this.getClass().getSimpleName()));
+            this.addMessage(new DomainNotificationError("State is required"));
         if (Objects.isNull(this.zipCode) || this.zipCode.isBlank())
-            this.addMessage(new DomainNotificationError("ZipCode is required", this.getClass().getSimpleName()));
+            this.addMessage(new DomainNotificationError("ZipCode is required"));
     }
 
     public String getStreet() {

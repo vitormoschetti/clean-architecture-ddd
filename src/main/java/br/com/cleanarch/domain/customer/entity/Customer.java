@@ -65,7 +65,7 @@ public class Customer extends BaseEntity implements IAggregateRoot {
 
     public void addRewardPoints(final Long points) {
         if (points < 0)
-            this.addMessage(new DomainNotificationError("Reward Points must be greater equal zero", this.getClass().getSimpleName()));
+            this.addMessage(new DomainNotificationError("Reward Points must be greater equal zero"));
 
         this.rewardPoints += points;
         this.audit.updateNow();
@@ -74,7 +74,7 @@ public class Customer extends BaseEntity implements IAggregateRoot {
     @Override
     protected void validate() {
         if (Objects.isNull(this.name) || this.name.isEmpty())
-            this.addMessage(new DomainNotificationError("Name is required", this.getClass().getSimpleName()));
+            this.addMessage(new DomainNotificationError("Name is required"));
         if (this.address.hasErrors())
             this.address.getMessages().forEach(this::addMessage);
     }

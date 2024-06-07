@@ -22,19 +22,19 @@ public class AddressTest {
         assertTrue(addressVOEmpty.hasErrors());
         assertEquals(4, addressVOEmpty.getMessages().size());
         assertEquals(Set.of(
-                new DomainNotificationError("Street is required", AddressVO.class.getSimpleName()),
-                new DomainNotificationError("City is required", AddressVO.class.getSimpleName()),
-                new DomainNotificationError("State is required", AddressVO.class.getSimpleName()),
-                new DomainNotificationError("ZipCode is required", AddressVO.class.getSimpleName())
+                new DomainNotificationError("Street is required"),
+                new DomainNotificationError("City is required"),
+                new DomainNotificationError("State is required"),
+                new DomainNotificationError("ZipCode is required")
         ), addressVOEmpty.getMessages());
 
         assertTrue(addressVONull.hasErrors());
         assertEquals(4, addressVONull.getMessages().size());
         assertEquals(Set.of(
-                new DomainNotificationError("Street is required", AddressVO.class.getSimpleName()),
-                new DomainNotificationError("City is required", AddressVO.class.getSimpleName()),
-                new DomainNotificationError("State is required", AddressVO.class.getSimpleName()),
-                new DomainNotificationError("ZipCode is required", AddressVO.class.getSimpleName())
+                new DomainNotificationError("Street is required"),
+                new DomainNotificationError("City is required"),
+                new DomainNotificationError("State is required"),
+                new DomainNotificationError("ZipCode is required")
         ), addressVONull.getMessages());
 
 

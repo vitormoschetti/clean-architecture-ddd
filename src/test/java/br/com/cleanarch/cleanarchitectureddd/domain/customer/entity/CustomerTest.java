@@ -25,7 +25,7 @@ public class CustomerTest extends BaseTeste {
         assertTrue(customer.hasErrors());
         assertEquals(1, customer.getMessages().size());
         assertEquals(Set.of(
-                new DomainNotificationError("Name is required", Customer.class.getSimpleName())
+                new DomainNotificationError("Name is required")
         ), customer.getMessages());
 
     }
@@ -41,7 +41,7 @@ public class CustomerTest extends BaseTeste {
         assertTrue(customer.hasErrors());
         assertEquals(1, customer.getMessages().size());
         assertEquals(Set.of(
-                new DomainNotificationError("Name is required", Customer.class.getSimpleName())
+                new DomainNotificationError("Name is required")
         ), customer.getMessages());
 
     }
@@ -100,7 +100,7 @@ public class CustomerTest extends BaseTeste {
         assertTrue(customer.hasErrors());
         assertEquals(1, customer.getMessages().size());
         assertEquals(Set.of(
-                new DomainNotificationError("Reward Points must be greater equal zero", Customer.class.getSimpleName())
+                new DomainNotificationError("Reward Points must be greater equal zero")
         ), customer.getMessages());
 
     }
@@ -115,10 +115,10 @@ public class CustomerTest extends BaseTeste {
         assertTrue(customer.hasErrors());
         assertEquals(4, customer.getMessages().size());
         assertEquals(Set.of(
-                new DomainNotificationError("Street is required", AddressVO.class.getSimpleName()),
-                new DomainNotificationError("City is required", AddressVO.class.getSimpleName()),
-                new DomainNotificationError("State is required", AddressVO.class.getSimpleName()),
-                new DomainNotificationError("ZipCode is required", AddressVO.class.getSimpleName())
+                new DomainNotificationError("Street is required"),
+                new DomainNotificationError("City is required"),
+                new DomainNotificationError("State is required"),
+                new DomainNotificationError("ZipCode is required")
         ), customer.getMessages());
 
     }
@@ -133,7 +133,7 @@ public class CustomerTest extends BaseTeste {
         assertTrue(customer.hasErrors());
         assertEquals(1, customer.getMessages().size());
         assertEquals(Set.of(
-                new DomainNotificationError("Name is required", Customer.class.getSimpleName())
+                new DomainNotificationError("Name is required")
         ), customer.getMessages());
 
     }
@@ -148,11 +148,11 @@ public class CustomerTest extends BaseTeste {
         assertTrue(customer.hasErrors());
         assertEquals(5, customer.getMessages().size());
         assertEquals(Set.of(
-                new DomainNotificationError("Name is required", Customer.class.getSimpleName()),
-                new DomainNotificationError("Street is required", AddressVO.class.getSimpleName()),
-                new DomainNotificationError("City is required", AddressVO.class.getSimpleName()),
-                new DomainNotificationError("State is required", AddressVO.class.getSimpleName()),
-                new DomainNotificationError("ZipCode is required", AddressVO.class.getSimpleName())
+                new DomainNotificationError("Name is required"),
+                new DomainNotificationError("Street is required"),
+                new DomainNotificationError("City is required"),
+                new DomainNotificationError("State is required"),
+                new DomainNotificationError("ZipCode is required")
         ), customer.getMessages());
 
     }

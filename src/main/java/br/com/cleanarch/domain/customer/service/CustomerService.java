@@ -3,9 +3,11 @@ package br.com.cleanarch.domain.customer.service;
 import br.com.cleanarch.domain.customer.entity.Customer;
 import br.com.cleanarch.domain.customer.repository.ICustomerRepository;
 import br.com.cleanarch.domain.shared.entity.exception.DomainException;
+import br.com.cleanarch.domain.shared.notification.INotificationError;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class CustomerService implements ICustomerService {
 
@@ -20,10 +22,13 @@ public class CustomerService implements ICustomerService {
         final var customer = new Customer();
         customer.create(name, street, city, state, zipCode);
 
+        verifyCustomerIsValid(customer);
+
         this.repository.create(customer);
 
         return customer;
     }
+
 
     @Override
     public Customer changeAddress(final Long id, final String street, final String city, final String state, final String zipCode) {
@@ -31,6 +36,8 @@ public class CustomerService implements ICustomerService {
         final var customer = this.repository.findById(id);
 
         customer.changeAddress(street, state, city, zipCode);
+
+        verifyCustomerIsValid(customer);
 
         this.repository.update(customer);
 
@@ -53,6 +60,8 @@ public class CustomerService implements ICustomerService {
 
         customer.changeAll(name, street, state, city, zipCode);
 
+        verifyCustomerIsValid(customer);
+
         this.repository.update(customer);
 
         return customer;
@@ -62,5 +71,11 @@ public class CustomerService implements ICustomerService {
     @Override
     public List<Customer> findAll() {
         return this.repository.findAll();
+    }
+
+    private static void verifyCustomerIsValid(Customer customer) {
+        if (customer.hasErrors()) {
+            throw new DomainException(customer.getMessages().stream().map(INotificationError::message).collect(Collectors.joining(", ")));
+        }
     }
 }

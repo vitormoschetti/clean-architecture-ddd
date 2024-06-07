@@ -4,6 +4,4 @@ public interface INotificationError {
 
     String message();
 
-    String context();
-
 }
