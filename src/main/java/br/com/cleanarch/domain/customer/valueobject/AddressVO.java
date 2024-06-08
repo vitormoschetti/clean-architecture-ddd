@@ -52,16 +52,6 @@ public class AddressVO extends BaseEntity implements IValueObject {
     }
 
     @Override
-    public String toString() {
-        return "AddressVO{" +
-                "street='" + street + '\'' +
-                ", city='" + city + '\'' +
-                ", state='" + state + '\'' +
-                ", zipCode='" + zipCode + '\'' +
-                '}';
-    }
-
-    @Override
     public boolean equals(final Object o) {
         if (this == o) return true;
         if (!(o instanceof final AddressVO addressVO)) return false;

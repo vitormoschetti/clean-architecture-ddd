@@ -1,4 +1,4 @@
-package br.com.cleanarch.cleanarchitectureddd.domain.customer.valueobject;
+package br.com.cleanarch.domain.customer.valueobject;
 
 import br.com.cleanarch.domain.customer.valueobject.AddressVO;
 import br.com.cleanarch.domain.shared.notification.DomainNotificationError;

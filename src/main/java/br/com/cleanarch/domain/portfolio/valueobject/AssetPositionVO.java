@@ -20,17 +20,24 @@ public class AssetPositionVO extends BaseEntity implements IValueObject {
     }
 
     public void buy(BigDecimal quantity, BigDecimal averagePurchasePrice) {
-        if (quantity.compareTo(BigDecimal.ZERO) <= 0 && averagePurchasePrice.compareTo(BigDecimal.ZERO) <= 0) {
+        if (quantityGreaterThanZero(quantity) && priceGreaterThanZero(averagePurchasePrice)) {
             calculateAveragePurchasePrice(quantity, averagePurchasePrice);
         }
         this.validate();
     }
 
     public void sell(BigDecimal quantity) {
-        if (quantity.compareTo(BigDecimal.ZERO) <= 0) {
+        if (quantityGreaterThanZero(quantity) && this.quantity.compareTo(quantity) >= 0) {
             this.quantity = this.quantity.subtract(quantity);
+            if (this.quantity.compareTo(BigDecimal.ZERO) == 0) {
+                this.averagePurchasePrice = BigDecimal.ZERO;
+            }
         }
         this.validate();
+    }
+
+    public BigDecimal totalInvested() {
+        return this.quantity.multiply(this.averagePurchasePrice);
     }
 
     private BigDecimal averagePriceOld() {
@@ -52,11 +59,27 @@ public class AssetPositionVO extends BaseEntity implements IValueObject {
         this.quantity = quantityAll;
     }
 
+    private boolean quantityGreaterThanZero(BigDecimal quantity) {
+        return priceGreaterThanZero(quantity);
+    }
+
+    private boolean priceGreaterThanZero(BigDecimal averagePurchasePrice) {
+        return averagePurchasePrice.compareTo(BigDecimal.ZERO) > 0;
+    }
+
+    public BigDecimal getQuantity() {
+        return quantity;
+    }
+
+    public BigDecimal getAveragePurchasePrice() {
+        return averagePurchasePrice;
+    }
+
     @Override
     protected void validate() {
-        if (quantity.compareTo(BigDecimal.ZERO) <= 0)
+        if (quantity.compareTo(BigDecimal.ZERO) < 0)
             this.addMessage(new DomainNotificationError("Quantity must be greater than zero"));
-        if (averagePurchasePrice.compareTo(BigDecimal.ZERO) <= 0)
+        if (averagePurchasePrice.compareTo(BigDecimal.ZERO) < 0)
             this.addMessage(new DomainNotificationError("Average purchase price must be greater than zero"));
     }
 

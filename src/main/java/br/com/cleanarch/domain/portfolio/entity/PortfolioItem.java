@@ -7,6 +7,7 @@ import br.com.cleanarch.domain.shared.notification.DomainNotification;
 import br.com.cleanarch.domain.shared.valueobject.AuditTimestamps;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
 public class PortfolioItem extends BaseEntity implements IAggregate {
 
@@ -34,11 +35,27 @@ public class PortfolioItem extends BaseEntity implements IAggregate {
         this.validate();
     }
 
+    public Long getAssetId() {
+        return assetId;
+    }
 
     @Override
     protected void validate() {
         if (this.position.hasErrors()) {
             this.position.getMessages().forEach(this::addMessage);
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PortfolioItem that = (PortfolioItem) o;
+        return Objects.equals(assetId, that.assetId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(assetId);
     }
 }

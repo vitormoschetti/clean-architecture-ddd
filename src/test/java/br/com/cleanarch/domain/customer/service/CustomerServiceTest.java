@@ -1,6 +1,6 @@
-package br.com.cleanarch.cleanarchitectureddd.domain.customer.service;//package br.com.ddd.domain.customer.service;
+package br.com.cleanarch.domain.customer.service;//package br.com.ddd.domain.customer.service;
 
-import br.com.cleanarch.cleanarchitectureddd.BaseTeste;
+import br.com.cleanarch.BaseTeste;
 import br.com.cleanarch.domain.customer.entity.Customer;
 import br.com.cleanarch.domain.customer.repository.ICustomerRepository;
 import br.com.cleanarch.domain.customer.service.CustomerService;

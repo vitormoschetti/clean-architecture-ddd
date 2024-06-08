@@ -1,4 +1,4 @@
-package br.com.cleanarch.cleanarchitectureddd;
+package br.com.cleanarch;
 
 import br.com.cleanarch.domain.customer.entity.Customer;
 import br.com.cleanarch.domain.customer.valueobject.AddressVO;
