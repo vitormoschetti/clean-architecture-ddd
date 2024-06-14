@@ -7,12 +7,13 @@ import br.com.cleanarch.domain.shared.notification.DomainNotification;
 import br.com.cleanarch.domain.shared.valueobject.AuditTimestamps;
 
 import java.math.BigDecimal;
+import java.time.Instant;
 import java.util.Objects;
 
 public class PortfolioItem extends BaseEntity implements IAggregate {
 
     private final Long assetId;
-    private AssetPositionVO position;
+    private final AssetPositionVO position;
     private final AuditTimestamps audit;
 
     protected PortfolioItem(Long assetId) {
@@ -38,6 +39,27 @@ public class PortfolioItem extends BaseEntity implements IAggregate {
     public Long getAssetId() {
         return assetId;
     }
+
+    public BigDecimal totalInvested() {
+        return this.position.totalInvested();
+    }
+
+    public BigDecimal getQuantity() {
+        return this.position.getQuantity();
+    }
+
+    public BigDecimal getAveragePurchasePrice() {
+        return this.position.getAveragePurchasePrice();
+    }
+
+    public Instant getCreatedAt() {
+        return this.audit.getCreatedAt();
+    }
+
+    public Instant getUpdatedAt() {
+        return this.audit.getUpdatedAt();
+    }
+
 
     @Override
     protected void validate() {
