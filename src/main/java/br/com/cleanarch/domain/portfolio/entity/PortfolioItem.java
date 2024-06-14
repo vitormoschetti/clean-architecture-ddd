@@ -36,6 +36,10 @@ public class PortfolioItem extends BaseEntity implements IAggregate {
         this.validate();
     }
 
+    public boolean hasPosition() {
+        return this.position.getQuantity().compareTo(BigDecimal.ZERO) > 0;
+    }
+
     public Long getAssetId() {
         return assetId;
     }

@@ -5,7 +5,7 @@ import br.com.cleanarch.domain.shared.repository.IGenericRepository;
 
 import java.util.UUID;
 
-public interface ICustomerRepository extends IGenericRepository<Customer> {
+public interface ICustomerRepository extends IGenericRepository<Customer, Long> {
 
     Customer findByTenantId(UUID tenantId);
 }

@@ -13,7 +13,8 @@ import java.util.UUID;
 
 public class Customer extends BaseEntity implements IAggregateRoot {
 
-    private String id;
+    // Todo id and tenantId?
+    private Long id;
     private UUID tenantId;
     private String name;
     private AddressVO address;
@@ -83,7 +84,7 @@ public class Customer extends BaseEntity implements IAggregateRoot {
         return this.active;
     }
 
-    public String getId() {
+    public Long getId() {
         return this.id;
     }
 

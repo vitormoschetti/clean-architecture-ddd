@@ -8,14 +8,14 @@ import java.util.UUID;
 
 public class CustomerCreatedEvent implements IEvent<CustomerCreatedRecord> {
 
-    private final String traceId;
+    private final UUID traceId;
     private final CustomerCreatedRecord payload;
     private final Instant instantCreated;
     private final String eventName;
 
     public CustomerCreatedEvent(final CustomerCreatedRecord payload) {
         this.eventName = this.getClass().getSimpleName().toLowerCase();
-        this.traceId = UUID.randomUUID().toString();
+        this.traceId = UUID.randomUUID();
         this.instantCreated = Instant.now().atOffset(ZoneOffset.UTC).toInstant();
         this.payload = payload;
     }
@@ -26,7 +26,7 @@ public class CustomerCreatedEvent implements IEvent<CustomerCreatedRecord> {
     }
 
     @Override
-    public String traceId() {
+    public UUID traceId() {
         return this.traceId;
     }
 

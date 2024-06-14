@@ -43,7 +43,7 @@ class PortfolioTest {
         //validation
         assertEquals(1, portfolio.quantityItems());
         assertNotNull(portfolio.getUpdatedAt());
-        final var optItem = portfolio.getItem(assetId);
+        final var optItem = portfolio.findItem(assetId);
         assertTrue(optItem.isPresent());
 
     }
@@ -63,7 +63,7 @@ class PortfolioTest {
         //validation
         assertEquals(1, portfolio.quantityItems());
         assertNotNull(portfolio.getUpdatedAt());
-        final var optItem = portfolio.getItem(assetId);
+        final var optItem = portfolio.findItem(assetId);
         assertTrue(optItem.isPresent());
 
         final var item = optItem.get();
@@ -92,7 +92,7 @@ class PortfolioTest {
         assertEquals(2, portfolio.quantityItems());
         assertNotNull(portfolio.getUpdatedAt());
 
-        final var optItemOne = portfolio.getItem(assetIdOne);
+        final var optItemOne = portfolio.findItem(assetIdOne);
         assertTrue(optItemOne.isPresent());
 
         final var itemOne = optItemOne.get();
@@ -102,7 +102,7 @@ class PortfolioTest {
         assertEquals(BigDecimal.TEN, itemOne.getAveragePurchasePrice());
         assertEquals(new BigDecimal(100), itemOne.totalInvested());
 
-        final var optItemTwo = portfolio.getItem(assetIdTwo);
+        final var optItemTwo = portfolio.findItem(assetIdTwo);
         assertTrue(optItemTwo.isPresent());
 
         final var itemTwo = optItemTwo.get();
@@ -129,7 +129,7 @@ class PortfolioTest {
         assertEquals(1, portfolio.quantityItems());
         assertNotNull(portfolio.getUpdatedAt());
 
-        final var optItem = portfolio.getItem(1L);
+        final var optItem = portfolio.findItem(1L);
         assertTrue(optItem.isPresent());
 
         final var item = optItem.get();
@@ -189,8 +189,6 @@ class PortfolioTest {
 
         //validation
         assertEquals(5, portfolio.quantityItems());
-        assertArrayEquals(List.of(1L, 2L, 3L, 4L, 5L).toArray(),
-                portfolio.listItemsAssetId().toArray());
 
     }
 

@@ -9,13 +9,13 @@ import java.util.UUID;
 public class CustomerChangedAddressEvent implements IEvent<CustomerChangedAddressRecord> {
 
     private final String eventName;
-    private final String traceId;
+    private final UUID traceId;
     private final CustomerChangedAddressRecord payload;
     private final Instant instantCreated;
 
     public CustomerChangedAddressEvent(final CustomerChangedAddressRecord payload) {
         this.eventName = this.getClass().getSimpleName().toLowerCase();
-        this.traceId = UUID.randomUUID().toString();
+        this.traceId = UUID.randomUUID();
         this.instantCreated = Instant.now().atOffset(ZoneOffset.UTC).toInstant();
         this.payload = payload;
     }
@@ -26,7 +26,7 @@ public class CustomerChangedAddressEvent implements IEvent<CustomerChangedAddres
     }
 
     @Override
-    public String traceId() {
+    public UUID traceId() {
         return this.traceId;
     }
 
