@@ -4,11 +4,13 @@ import br.com.cleanarch.domain.customer.entity.Customer;
 import br.com.cleanarch.domain.customer.repository.ICustomerRepository;
 import br.com.cleanarch.domain.shared.entity.exception.DomainException;
 import br.com.cleanarch.domain.shared.notification.INotificationError;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+@Component
 public class CustomerService implements ICustomerService {
 
     private final ICustomerRepository repository;
@@ -17,7 +19,9 @@ public class CustomerService implements ICustomerService {
         this.repository = repository;
     }
 
-    public Customer create(final String name, final String street, final String city, final String state, final String zipCode) {
+    public Customer create(final String name, final String street,
+                           final String city, final String state,
+                           final String zipCode) {
 
         final var customer = new Customer();
         customer.create(name, street, city, state, zipCode);
