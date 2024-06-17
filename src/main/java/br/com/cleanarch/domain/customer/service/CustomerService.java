@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Component
@@ -35,32 +36,33 @@ public class CustomerService implements ICustomerService {
 
 
     @Override
-    public Customer changeAddress(final Long id, final String street, final String city, final String state, final String zipCode) {
+    public void changeAddress(final UUID tenantId, final String street, final String city, final String state, final String zipCode) {
 
-        final var customer = this.repository.findById(id);
+        final var customer = this.repository.findByTenantId(tenantId);
+
+        if (Objects.isNull(customer))
+            throw new DomainException(String.format("Customer with id: %s not found", tenantId));
 
         customer.changeAddress(street, state, city, zipCode);
 
         verifyCustomerIsValid(customer);
 
         this.repository.update(customer);
-
-        return customer;
     }
 
     @Override
-    public Customer findById(final Long id) {
-        return this.repository.findById(id);
+    public Customer findByTenantId(final UUID tenantId) {
+        return this.repository.findByTenantId(tenantId);
     }
 
     @Override
-    public Customer update(final Long id, final String name, final String street,
+    public Customer update(final UUID tenantId, final String name, final String street,
                            final String state, final String city, final String zipCode) {
 
-        final var customer = this.findById(id);
+        final var customer = this.findByTenantId(tenantId);
 
         if (Objects.isNull(customer))
-            throw new DomainException(String.format("Customer with id: %s not found", id));
+            throw new DomainException(String.format("Customer with id: %s not found", tenantId));
 
         customer.changeAll(name, street, state, city, zipCode);
 

@@ -3,16 +3,17 @@ package br.com.cleanarch.domain.customer.service;
 import br.com.cleanarch.domain.customer.entity.Customer;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface ICustomerService {
 
     Customer create(final String name, final String street, final String city, final String state, final String zipCode);
 
-    Customer changeAddress(final Long id, final String street, final String city, final String state, final String zipCode);
+    void changeAddress(final UUID tenantId, final String street, final String city, final String state, final String zipCode);
 
-    Customer findById(final Long id);
+    Customer findByTenantId(final UUID tenantId);
 
-    Customer update(final Long id, final String name, final String street,
+    Customer update(final UUID tenantId, final String name, final String street,
                     final String state, final String city, final String zipCode);
 
     List<Customer> findAll();

@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 @AllArgsConstructor
-public class CreateCustomerUseCase implements IUseCaseWithParam<CreateUserInput, CreateUserOutput> {
+public class CustomerCreateUseCase implements IUseCaseWithParam<CreateUserInput, CreateUserOutput> {
 
     private final CustomerService service;
 
