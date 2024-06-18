@@ -14,6 +14,8 @@ import java.util.stream.Collectors;
 @Component
 public class CustomerService implements ICustomerService {
 
+    //TODO implementar os eventos de customer service
+
     private final ICustomerRepository repository;
 
     public CustomerService(final ICustomerRepository repository) {
