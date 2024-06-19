@@ -1,7 +1,7 @@
 package br.com.cleanarch.application.customer.usecase;
 
-import br.com.cleanarch.application.customer.output.AddressVOOutput;
-import br.com.cleanarch.application.customer.output.CustomerFindByTenantIdOutput;
+import br.com.cleanarch.application.customer.usecase.output.AddressVOOutput;
+import br.com.cleanarch.application.customer.usecase.output.CustomerFindByTenantIdOutput;
 import br.com.cleanarch.application.shared.usecase.IUseCaseWithParam;
 import br.com.cleanarch.domain.customer.service.CustomerService;
 import lombok.extern.slf4j.Slf4j;
