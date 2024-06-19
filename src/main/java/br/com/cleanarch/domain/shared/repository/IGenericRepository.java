@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface IGenericRepository<T extends IAggregateRoot, I> {
 
-    void create(final T entity);
+    void create(final T model);
 
-    void update(final T entity);
+    void update(final T model);
 
     T findById(final I id);
 
