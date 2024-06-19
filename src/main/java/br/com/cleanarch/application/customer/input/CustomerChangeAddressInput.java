@@ -1,4 +1,4 @@
-package br.com.cleanarch.application.customer.usecase.input;
+package br.com.cleanarch.application.customer.input;
 
 public record CustomerChangeAddressInput(String street, String city, String state, String zipCode) {
 }

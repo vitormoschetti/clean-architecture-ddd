@@ -1,6 +1,6 @@
 package br.com.cleanarch.application.customer.usecase;
 
-import br.com.cleanarch.application.customer.usecase.output.CustomerFindAllOutput;
+import br.com.cleanarch.application.customer.output.CustomerFindAllOutput;
 import br.com.cleanarch.application.shared.usecase.IUseCase;
 import br.com.cleanarch.domain.customer.service.CustomerService;
 import lombok.extern.slf4j.Slf4j;

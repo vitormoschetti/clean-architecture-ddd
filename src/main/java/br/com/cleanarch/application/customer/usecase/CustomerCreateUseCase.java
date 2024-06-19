@@ -1,7 +1,7 @@
 package br.com.cleanarch.application.customer.usecase;
 
-import br.com.cleanarch.application.customer.usecase.input.CreateUserInput;
-import br.com.cleanarch.application.customer.usecase.output.CreateUserOutput;
+import br.com.cleanarch.application.customer.input.CreateUserInput;
+import br.com.cleanarch.application.customer.output.CreateUserOutput;
 import br.com.cleanarch.application.shared.usecase.IUseCaseWithParam;
 import br.com.cleanarch.domain.customer.service.CustomerService;
 import lombok.extern.slf4j.Slf4j;

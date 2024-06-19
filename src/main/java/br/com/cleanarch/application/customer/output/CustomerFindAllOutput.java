@@ -1,4 +1,4 @@
-package br.com.cleanarch.application.customer.usecase.output;
+package br.com.cleanarch.application.customer.output;
 
 import java.util.UUID;
 
