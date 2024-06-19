@@ -27,6 +27,17 @@ public class Customer extends BaseEntity implements IAggregateRoot {
         this.audit = new AuditTimestamps();
     }
 
+    public Customer(Long id, UUID tenantId, String name, AddressVO address, boolean active, Long rewardPoints, AuditTimestamps audit) {
+        super(new DomainNotification());
+        this.id = id;
+        this.tenantId = tenantId;
+        this.name = name;
+        this.address = address;
+        this.active = active;
+        this.rewardPoints = rewardPoints;
+        this.audit = audit;
+    }
+
     public void create(final String name, final String street, final String city, final String state, final String zipCode) {
         this.tenantId = UUID.randomUUID();
         this.name = name;
@@ -102,6 +113,10 @@ public class Customer extends BaseEntity implements IAggregateRoot {
 
     public AddressVO getAddress() {
         return this.address;
+    }
+
+    public AuditTimestamps getAudit() {
+        return audit;
     }
 
     public Instant getCreatedAt() {
