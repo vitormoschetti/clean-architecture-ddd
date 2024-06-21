@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository
@@ -19,7 +20,7 @@ public class CustomerRepositoryImpl implements ICustomerRepository {
     @Override
     public Customer findByTenantId(UUID tenantId) {
         final var entity = repository.findByTenantId(tenantId);
-        return factory.toModel(entity);
+        return entity.map(factory::toModel).orElse(null);
     }
 
     @Override

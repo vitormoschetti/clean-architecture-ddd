@@ -1,9 +1,11 @@
 package br.com.cleanarch.domain.customer.service;
 
 import br.com.cleanarch.domain.customer.entity.Customer;
+import br.com.cleanarch.domain.customer.exception.CustomerNotFoundException;
 import br.com.cleanarch.domain.customer.repository.ICustomerRepository;
 import br.com.cleanarch.domain.shared.entity.exception.DomainException;
 import br.com.cleanarch.domain.shared.notification.INotificationError;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -12,15 +14,12 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Component
+@AllArgsConstructor
 public class CustomerService implements ICustomerService {
 
     //TODO implementar os eventos de customer service
 
     private final ICustomerRepository repository;
-
-    public CustomerService(final ICustomerRepository repository) {
-        this.repository = repository;
-    }
 
     public Customer create(final String name, final String street,
                            final String city, final String state,
@@ -42,8 +41,7 @@ public class CustomerService implements ICustomerService {
 
         final var customer = this.repository.findByTenantId(tenantId);
 
-        if (Objects.isNull(customer))
-            throw new DomainException(String.format("Customer with id: %s not found", tenantId));
+        existsCustomer(tenantId, customer);
 
         customer.changeAddress(street, state, city, zipCode);
 
@@ -52,9 +50,14 @@ public class CustomerService implements ICustomerService {
         this.repository.update(customer);
     }
 
+
     @Override
     public Customer findByTenantId(final UUID tenantId) {
-        return this.repository.findByTenantId(tenantId);
+        final var customer = this.repository.findByTenantId(tenantId);
+
+        existsCustomer(tenantId, customer);
+
+        return customer;
     }
 
     @Override
@@ -63,8 +66,7 @@ public class CustomerService implements ICustomerService {
 
         final var customer = this.findByTenantId(tenantId);
 
-        if (Objects.isNull(customer))
-            throw new DomainException(String.format("Customer with id: %s not found", tenantId));
+        existsCustomer(tenantId, customer);
 
         customer.changeAll(name, street, state, city, zipCode);
 
@@ -81,7 +83,12 @@ public class CustomerService implements ICustomerService {
         return this.repository.findAll();
     }
 
-    private static void verifyCustomerIsValid(Customer customer) {
+    private void existsCustomer(UUID tenantId, Customer customer) {
+        if (Objects.isNull(customer))
+            throw new CustomerNotFoundException(String.format("Customer with id: %s not found", tenantId));
+    }
+
+    private void verifyCustomerIsValid(Customer customer) {
         if (customer.hasErrors()) {
             throw new DomainException(customer.getMessages().stream().map(INotificationError::message).collect(Collectors.joining(", ")));
         }

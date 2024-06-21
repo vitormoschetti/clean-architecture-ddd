@@ -15,13 +15,14 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "customerEntity")
 @Table(name = "customer")
+@Entity(name = "customerEntity")
 public class CustomerEntity implements IEntity {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "customer_seq")
+    @SequenceGenerator(name="customer_seq",sequenceName="customer_seq", allocationSize=1)
     private Long id;
 
     @Column(name = "tenant_id")
