@@ -12,9 +12,9 @@ public interface IPortfolioService {
 
     Portfolio create(Long customerId);
 
-    PortfolioItem buy(UUID portfolioId, Long assetId, BigDecimal quantity, BigDecimal averagePurchasePrice);
+    void buy(UUID portfolioId, Long assetId, BigDecimal quantity, BigDecimal averagePurchasePrice);
 
-    PortfolioItem sell(UUID portfolioId, Long assetId, BigDecimal quantity);
+    void sell(UUID portfolioId, Long assetId, BigDecimal quantity);
 
     List<PortfolioItem> listItems(UUID portfolioId);
 

@@ -32,7 +32,7 @@ public class PortfolioService implements IPortfolioService {
     }
 
     @Override
-    public PortfolioItem buy(UUID portfolioId, Long assetId, BigDecimal quantity, BigDecimal averagePurchasePrice) {
+    public void buy(UUID portfolioId, Long assetId, BigDecimal quantity, BigDecimal averagePurchasePrice) {
 
         final var portfolio = repository.findById(portfolioId);
 
@@ -49,11 +49,10 @@ public class PortfolioService implements IPortfolioService {
 //                        new PortfolioItemBuyRecord(item.getAssetId(), item.getAveragePurchasePrice(),
 //                                item.getQuantity(), Instant.now().atOffset(ZoneOffset.UTC).toInstant())));
 
-        return item;
     }
 
     @Override
-    public PortfolioItem sell(UUID portfolioId, Long assetId, BigDecimal quantity) {
+    public void sell(UUID portfolioId, Long assetId, BigDecimal quantity) {
 
         final var portfolio = repository.findById(portfolioId);
 
@@ -78,8 +77,6 @@ public class PortfolioService implements IPortfolioService {
 //        else
 //            positionClosedDispatcher.dispatch(new PortfolioItemPositionClosedEvent(
 //                    new PortfolioItemPositionClosedRecord(item.getAssetId(), Instant.now().atOffset(ZoneOffset.UTC).toInstant())));
-
-        return item;
 
     }
 
