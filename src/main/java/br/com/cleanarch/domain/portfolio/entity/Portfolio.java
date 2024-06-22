@@ -12,11 +12,11 @@ import java.util.*;
 public class Portfolio extends BaseEntity implements IAggregateRoot {
 
     private final UUID id;
-    private final UUID customerId;
+    private final Long customerId;
     private final Set<PortfolioItem> portfolioItems;
     private final AuditTimestamps audit;
 
-    public Portfolio(UUID customerId) {
+    public Portfolio(Long customerId) {
         super(new DomainNotification());
         this.id = UUID.randomUUID();
         this.customerId = customerId;
@@ -82,7 +82,7 @@ public class Portfolio extends BaseEntity implements IAggregateRoot {
         return this.id;
     }
 
-    public UUID getCustomerId() {
+    public Long getCustomerId() {
         return this.customerId;
     }
 

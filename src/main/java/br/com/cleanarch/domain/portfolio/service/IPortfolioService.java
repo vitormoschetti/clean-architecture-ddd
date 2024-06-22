@@ -10,7 +10,7 @@ import java.util.UUID;
 
 public interface IPortfolioService {
 
-    Portfolio create(UUID customerId);
+    Portfolio create(Long customerId);
 
     PortfolioItem buy(UUID portfolioId, Long assetId, BigDecimal quantity, BigDecimal averagePurchasePrice);
 

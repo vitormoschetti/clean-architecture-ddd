@@ -11,8 +11,9 @@ import br.com.cleanarch.domain.portfolio.event.positionclosed.PortfolioItemPosit
 import br.com.cleanarch.domain.portfolio.event.sell.PortfolioItemSellDispatcher;
 import br.com.cleanarch.domain.portfolio.event.sell.PortfolioItemSellEvent;
 import br.com.cleanarch.domain.portfolio.event.sell.PortfolioItemSellRecord;
+import br.com.cleanarch.domain.portfolio.exception.PortfolioItemNotFoundException;
+import br.com.cleanarch.domain.portfolio.exception.PortfolioNotFoundException;
 import br.com.cleanarch.domain.portfolio.repository.IPortfolioRepository;
-import br.com.cleanarch.domain.shared.entity.exception.DomainException;
 
 import java.math.BigDecimal;
 import java.time.Instant;
@@ -40,7 +41,7 @@ public class PortfolioService implements IPortfolioService {
     }
 
     @Override
-    public Portfolio create(UUID customerId) {
+    public Portfolio create(Long customerId) {
         final var portfolio = new Portfolio(customerId);
         repository.create(portfolio);
         return portfolio;
@@ -52,7 +53,7 @@ public class PortfolioService implements IPortfolioService {
         final var portfolio = repository.findById(portfolioId);
 
         if (Objects.isNull(portfolio)) {
-            throw new DomainException("Portfolio not found");
+            throw new PortfolioNotFoundException("Portfolio not found");
         }
 
         final var item = portfolio.buy(assetId, quantity, averagePurchasePrice);
@@ -73,13 +74,13 @@ public class PortfolioService implements IPortfolioService {
         final var portfolio = repository.findById(portfolioId);
 
         if (Objects.isNull(portfolio)) {
-            throw new DomainException("Portfolio not found");
+            throw new PortfolioNotFoundException("Portfolio not found");
         }
 
         final var item = portfolio.sell(assetId, quantity);
 
         if (Objects.isNull(item)) {
-            throw new DomainException("Item not found");
+            throw new PortfolioItemNotFoundException("Item not found");
         }
 
         repository.update(portfolio);
