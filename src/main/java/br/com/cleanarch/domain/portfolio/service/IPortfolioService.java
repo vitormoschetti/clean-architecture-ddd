@@ -20,4 +20,6 @@ public interface IPortfolioService {
 
     Optional<PortfolioItem> findItem(UUID portfolioId, Long assetId);
 
+    Portfolio findPortfolio(Long customerId);
+
 }
