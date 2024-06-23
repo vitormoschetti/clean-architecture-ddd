@@ -2,7 +2,7 @@
 
 - [x] *Domain rules*
 - [x] *Application use cases*
-- [ ] *Controllers*
+- [x] *Controllers*
 - [ ] *Repositories*
 - [ ] *Domain events*
 - [ ] *Kafka producer (events implementation)*
