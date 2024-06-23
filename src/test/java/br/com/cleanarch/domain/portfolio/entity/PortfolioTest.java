@@ -16,7 +16,7 @@ class PortfolioTest {
     void shouldCreatePortfolioWithCustomerId() {
 
         //scenario && execution
-        final var customerId = UUID.randomUUID();
+        final var customerId = 1L;
         final var portfolio = new Portfolio(customerId);
 
         //validation
@@ -34,7 +34,7 @@ class PortfolioTest {
     void shouldBuyNewItem() {
 
         //scenario
-        final var portfolio = new Portfolio(UUID.randomUUID());
+        final var portfolio = new Portfolio(1L);
         final long assetId = 1L;
 
         //execution
@@ -53,7 +53,7 @@ class PortfolioTest {
     void shouldBuyMoreOfAnItem() {
 
         //scenario
-        final var portfolio = new Portfolio(UUID.randomUUID());
+        final var portfolio = new Portfolio(1L);
         final long assetId = 1L;
 
         //execution
@@ -80,7 +80,7 @@ class PortfolioTest {
     void shouldBuyTwoNewItems() {
 
         //scenario
-        final var portfolio = new Portfolio(UUID.randomUUID());
+        final var portfolio = new Portfolio(1L);
         final long assetIdOne = 1L;
         final long assetIdTwo = 2L;
 
@@ -119,7 +119,7 @@ class PortfolioTest {
     void shouldSellAnItem() {
 
         //scenario
-        final var portfolio = new Portfolio(UUID.randomUUID());
+        final var portfolio = new Portfolio(1L);
         portfolio.buy(1L, BigDecimal.TEN, BigDecimal.TEN);
 
         //execution
@@ -145,7 +145,7 @@ class PortfolioTest {
     void shouldSellAllPositionOfAnItem() {
 
         //scenario
-        final var portfolio = new Portfolio(UUID.randomUUID());
+        final var portfolio = new Portfolio(1L);
         portfolio.buy(1L, BigDecimal.TEN, BigDecimal.TEN);
 
         //execution
@@ -162,7 +162,7 @@ class PortfolioTest {
     void shouldSellAnItemThatDoesNotExist() {
 
         //scenario
-        final var portfolio = new Portfolio(UUID.randomUUID());
+        final var portfolio = new Portfolio(1L);
         portfolio.buy(1L, BigDecimal.TEN, BigDecimal.TEN);
 
         //execution
@@ -178,7 +178,7 @@ class PortfolioTest {
     void shouldListItemsAssetId() {
 
         //scenario
-        final var portfolio = new Portfolio(UUID.randomUUID());
+        final var portfolio = new Portfolio(1L);
 
         //execution
         portfolio.buy(1L, BigDecimal.TEN, BigDecimal.TEN);

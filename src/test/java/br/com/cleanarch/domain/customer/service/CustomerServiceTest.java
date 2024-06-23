@@ -8,6 +8,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -16,8 +18,7 @@ import java.util.UUID;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class CustomerServiceTest extends BaseTeste {
@@ -27,6 +28,9 @@ class CustomerServiceTest extends BaseTeste {
 
     @Mock
     ICustomerRepository repository;
+
+    @Captor
+    ArgumentCaptor<Customer> customerCaptor;
 
     @Test
     @DisplayName("should created customer")
@@ -55,7 +59,7 @@ class CustomerServiceTest extends BaseTeste {
         //scenario
         final var customerMock = this.buildValidCustomer();
 
-        when(repository.findById(anyLong())).thenReturn(customerMock);
+        when(repository.findByTenantId(any(UUID.class))).thenReturn(customerMock);
 
         doNothing().when(repository).update(any(Customer.class));
 
@@ -64,12 +68,16 @@ class CustomerServiceTest extends BaseTeste {
 
         //validation
 
+        verify(repository, times(1)).update(customerCaptor.capture());
+
+        final var customer = customerCaptor.getValue();
+
         //TODO captor repository save e validate
-//        Assertions.assertEquals(customer.getTenantId(), customerMock.getTenantId());
-//        Assertions.assertEquals(customer.getName(), customerMock.getName());
-//        Assertions.assertEquals(customer.getAddress(), customerMock.getAddress());
-//        Assertions.assertEquals(customer.getRewardPoints(), customerMock.getRewardPoints());
-//        Assertions.assertEquals(customer.isActive(), customerMock.isActive());
+        Assertions.assertEquals(customer.getTenantId(), customerMock.getTenantId());
+        Assertions.assertEquals(customer.getName(), customerMock.getName());
+        Assertions.assertEquals(customer.getAddress(), customerMock.getAddress());
+        Assertions.assertEquals(customer.getRewardPoints(), customerMock.getRewardPoints());
+        Assertions.assertEquals(customer.isActive(), customerMock.isActive());
 
     }
 
@@ -80,7 +88,7 @@ class CustomerServiceTest extends BaseTeste {
         //scenario
         final var customerMock = this.buildValidCustomer();
 
-        when(repository.findById(anyLong())).thenReturn(customerMock);
+        when(repository.findByTenantId(any(UUID.class))).thenReturn(customerMock);
 
         doNothing().when(repository).update(any(Customer.class));
 
@@ -104,7 +112,7 @@ class CustomerServiceTest extends BaseTeste {
 
         //scenario
         final var customerMock = buildValidCustomer();
-        when(repository.findById(anyLong())).thenReturn(customerMock);
+        when(repository.findByTenantId(any(UUID.class))).thenReturn(customerMock);
 
         //execution
         final var customer = this.customerService.findByTenantId(UUID.randomUUID());
