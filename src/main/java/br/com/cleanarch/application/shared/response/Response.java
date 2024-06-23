@@ -20,7 +20,6 @@ public class Response<T> {
     final boolean success;
     private final T data;
 
-
     private Response(HttpStatus statusCode, List<String> messages, boolean success, T data) {
         this.statusCode = statusCode.value();
         this.messages = messages;
