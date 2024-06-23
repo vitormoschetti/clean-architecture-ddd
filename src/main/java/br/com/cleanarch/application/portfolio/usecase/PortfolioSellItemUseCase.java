@@ -1,6 +1,6 @@
 package br.com.cleanarch.application.portfolio.usecase;
 
-import br.com.cleanarch.application.portfolio.input.PortfolioBuyItemInput;
+import br.com.cleanarch.application.portfolio.input.PortfolioSellItemInput;
 import br.com.cleanarch.application.shared.usecase.IUseCaseWithParam;
 import br.com.cleanarch.domain.portfolio.service.IPortfolioService;
 import lombok.AllArgsConstructor;
@@ -13,17 +13,17 @@ import java.util.UUID;
 @Slf4j
 @Service
 @AllArgsConstructor
-public class PortfolioBuyItemUseCase implements IUseCaseWithParam<Tuple2<UUID, PortfolioBuyItemInput>, Void> {
+public class PortfolioSellItemUseCase implements IUseCaseWithParam<Tuple2<UUID, PortfolioSellItemInput>, Void> {
 
     private final IPortfolioService portfolioService;
 
     @Override
-    public Void execute(Tuple2<UUID, PortfolioBuyItemInput> param) {
+    public Void execute(Tuple2<UUID, PortfolioSellItemInput> param) {
 
         final var portfolioId = param.getT1();
         final var input = param.getT2();
 
-        portfolioService.buy(portfolioId, input.assetId(), input.quantity(), input.averagePurchasePrice());
+        portfolioService.sell(portfolioId, input.assetId(), input.quantity());
 
         return null;
     }

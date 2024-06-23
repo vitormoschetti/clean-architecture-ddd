@@ -2,7 +2,7 @@ package br.com.cleanarch.application.customer.usecase;
 
 import br.com.cleanarch.application.customer.input.CustomerChangeAddressInput;
 import br.com.cleanarch.application.shared.usecase.IUseCaseWithParam;
-import br.com.cleanarch.domain.customer.service.CustomerService;
+import br.com.cleanarch.domain.customer.service.ICustomerService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -15,8 +15,7 @@ import java.util.UUID;
 @AllArgsConstructor
 public class CustomerChangeAddressUseCase implements IUseCaseWithParam<Tuple2<UUID, CustomerChangeAddressInput>, Void> {
 
-    private final CustomerService customerService;
-
+    private final ICustomerService customerService;
 
     @Override
     public Void execute(Tuple2<UUID, CustomerChangeAddressInput> param) {

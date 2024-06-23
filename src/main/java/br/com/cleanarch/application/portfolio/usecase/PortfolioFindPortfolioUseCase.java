@@ -3,7 +3,7 @@ package br.com.cleanarch.application.portfolio.usecase;
 import br.com.cleanarch.application.portfolio.output.PortfolioFindPortfolioOutput;
 import br.com.cleanarch.application.portfolio.output.PortfolioItemOutput;
 import br.com.cleanarch.application.shared.usecase.IUseCaseWithParam;
-import br.com.cleanarch.domain.portfolio.service.PortfolioService;
+import br.com.cleanarch.domain.portfolio.service.IPortfolioService;
 import br.com.cleanarch.domain.shared.util.InstantUtil;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class PortfolioFindPortfolioUseCase implements IUseCaseWithParam<Long, PortfolioFindPortfolioOutput> {
 
-    private final PortfolioService portfolioService;
+    private final IPortfolioService portfolioService;
 
 
     @Override

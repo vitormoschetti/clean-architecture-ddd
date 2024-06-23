@@ -2,7 +2,7 @@ package br.com.cleanarch.application.portfolio.usecase;
 
 import br.com.cleanarch.application.portfolio.output.PortfolioListItemsOutput;
 import br.com.cleanarch.application.shared.usecase.IUseCaseWithParam;
-import br.com.cleanarch.domain.portfolio.service.PortfolioService;
+import br.com.cleanarch.domain.portfolio.service.IPortfolioService;
 import br.com.cleanarch.domain.shared.util.InstantUtil;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,7 +16,7 @@ import java.util.UUID;
 @AllArgsConstructor
 public class PortfolioListItemsUseCase implements IUseCaseWithParam<UUID, List<PortfolioListItemsOutput>> {
 
-    private final PortfolioService portfolioService;
+    private final IPortfolioService portfolioService;
 
     @Override
     public List<PortfolioListItemsOutput> execute(UUID portfolioId) {

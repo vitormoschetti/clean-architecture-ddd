@@ -3,8 +3,8 @@ package br.com.cleanarch.application.customer.usecase;
 import br.com.cleanarch.application.customer.input.CreateCustomerInput;
 import br.com.cleanarch.application.customer.output.CreateUserOutput;
 import br.com.cleanarch.application.shared.usecase.IUseCaseWithParam;
-import br.com.cleanarch.domain.customer.service.CustomerService;
-import br.com.cleanarch.domain.portfolio.service.PortfolioService;
+import br.com.cleanarch.domain.customer.service.ICustomerService;
+import br.com.cleanarch.domain.portfolio.service.IPortfolioService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -14,8 +14,8 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class CustomerCreateUseCase implements IUseCaseWithParam<CreateCustomerInput, CreateUserOutput> {
 
-    private final CustomerService service;
-    private final PortfolioService portfolioService;
+    private final ICustomerService service;
+    private final IPortfolioService portfolioService;
 
     @Override
     public CreateUserOutput execute(CreateCustomerInput param) {

@@ -1,7 +1,7 @@
 package br.com.cleanarch.infra.customer.entity;
 
-import br.com.cleanarch.infra.shared.entity.AuditEntity;
 import br.com.cleanarch.infra.converter.UUIDToStringConverter;
+import br.com.cleanarch.infra.shared.entity.AuditEntity;
 import br.com.cleanarch.infra.shared.entity.IEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -22,7 +22,7 @@ public class CustomerEntity implements IEntity {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "customer_seq")
-    @SequenceGenerator(name="customer_seq",sequenceName="customer_seq", allocationSize=1)
+    @SequenceGenerator(name = "customer_seq", sequenceName = "customer_seq", allocationSize = 1)
     private Long id;
 
     @Column(name = "tenant_id")
@@ -43,7 +43,6 @@ public class CustomerEntity implements IEntity {
 
     @Embedded
     private AuditEntity audit;
-
 
 
 }
