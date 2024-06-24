@@ -3,7 +3,7 @@
 - [x] *Domain rules*
 - [x] *Application use cases*
 - [x] *Controllers*
-- [ ] *Repositories*
+- [x] *Repositories*
 - [ ] *Domain events*
 - [ ] *Kafka producer (events implementation)*
 - [ ] *New Service - Service Notification - Kafka listeners - first version only logs events*
