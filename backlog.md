@@ -8,6 +8,7 @@
 - [ ] *Kafka producer (events implementation)*
 - [ ] *New Service - Service Notification - Kafka listeners - first version only logs events*
 - [ ] *Metrics Grafana, Prometheus, OpenTelemetry*
+- [ ] *Avro schemas - kafka*
 - [ ] *Docker to up all*
 - [ ] *New Service  - Service Asset Broker - use aws with localstack*
 - [ ] *Kubernetes*
