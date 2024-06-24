@@ -7,4 +7,14 @@ import java.time.Instant;
 
 public record PortfolioItemSellRecord(Long assetId, BigDecimal price, BigDecimal quantity, Instant sellAt)
         implements IRecord {
+
+    @Override
+    public String toString() {
+        return "PortfolioItemSellRecord{" +
+                "assetId=" + assetId +
+                ", price=" + price +
+                ", quantity=" + quantity +
+                ", sellAt=" + sellAt +
+                '}';
+    }
 }
