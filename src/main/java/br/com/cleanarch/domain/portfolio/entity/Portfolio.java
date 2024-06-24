@@ -13,7 +13,7 @@ public class Portfolio extends BaseEntity implements IAggregateRoot {
 
     private final UUID id;
     private final Long customerId;
-    private final Set<PortfolioItem> portfolioItems;
+    private final Set<PortfolioItem> items;
     private final AuditTimestamps audit;
 
     public Portfolio(Long customerId) {
@@ -21,18 +21,26 @@ public class Portfolio extends BaseEntity implements IAggregateRoot {
         this.id = UUID.randomUUID();
         this.customerId = customerId;
         this.audit = new AuditTimestamps();
-        this.portfolioItems = new HashSet<>();
+        this.items = new HashSet<>();
+    }
+
+    public Portfolio(UUID id, Long customerId, Set<PortfolioItem> items, AuditTimestamps audit) {
+        super(new DomainNotification());
+        this.id = id;
+        this.customerId = customerId;
+        this.items = items;
+        this.audit = audit;
     }
 
     public PortfolioItem buy(Long assetId, BigDecimal quantity, BigDecimal averagePurchasePrice) {
 
-        final var item = this.portfolioItems.stream()
+        final var item = this.items.stream()
                 .filter(portfolioItem -> portfolioItem.getAssetId().equals(assetId))
-                .findFirst().orElse(new PortfolioItem(assetId));
+                .findFirst().orElse(new PortfolioItem(assetId, this.getId()));
 
         item.buy(quantity, averagePurchasePrice);
 
-        this.portfolioItems.add(item);
+        this.items.add(item);
 
         this.audit.updateNow();
 
@@ -42,7 +50,7 @@ public class Portfolio extends BaseEntity implements IAggregateRoot {
     }
 
     public PortfolioItem sell(Long assetId, BigDecimal quantity) {
-        final var item = this.portfolioItems.stream()
+        final var item = this.items.stream()
                 .filter(portfolioItem -> portfolioItem.getAssetId().equals(assetId))
                 .findFirst().orElse(null);
 
@@ -50,7 +58,7 @@ public class Portfolio extends BaseEntity implements IAggregateRoot {
 
             item.sell(quantity);
 
-            this.portfolioItems.add(item);
+            this.items.add(item);
 
             this.clearPositionsZeroQuantity();
 
@@ -62,20 +70,20 @@ public class Portfolio extends BaseEntity implements IAggregateRoot {
     }
 
     private void clearPositionsZeroQuantity() {
-        this.portfolioItems.removeIf(portfolioItem -> portfolioItem.getQuantity().equals(BigDecimal.ZERO));
+        this.items.removeIf(portfolioItem -> portfolioItem.getQuantity().equals(BigDecimal.ZERO));
     }
 
     public List<PortfolioItem> listItemsAssetId() {
-        return this.portfolioItems.stream().toList();
+        return this.items.stream().toList();
     }
 
     public Optional<PortfolioItem> findItem(Long assetId) {
-        return this.portfolioItems.stream().filter(item -> item.getAssetId().equals(assetId))
+        return this.items.stream().filter(item -> item.getAssetId().equals(assetId))
                 .findFirst();
     }
 
     public int quantityItems() {
-        return portfolioItems.size();
+        return items.size();
     }
 
     public UUID getId() {
@@ -92,6 +100,10 @@ public class Portfolio extends BaseEntity implements IAggregateRoot {
 
     public Instant getUpdatedAt() {
         return this.audit.getUpdatedAt();
+    }
+
+    public AuditTimestamps getAudit() {
+        return audit;
     }
 
     @Override

@@ -9,20 +9,30 @@ import br.com.cleanarch.domain.shared.valueobject.AuditTimestamps;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.Objects;
+import java.util.UUID;
 
 public class PortfolioItem extends BaseEntity implements IAggregate {
 
     private final Long assetId;
+    private final UUID portfolioId;
     private final AssetPositionVO position;
     private final AuditTimestamps audit;
 
-    protected PortfolioItem(Long assetId) {
+    protected PortfolioItem(Long assetId, UUID portfolioId) {
         super(new DomainNotification());
         this.assetId = assetId;
+        this.portfolioId = portfolioId;
         this.audit = new AuditTimestamps();
         this.position = new AssetPositionVO();
     }
 
+    public PortfolioItem(Long assetId, AssetPositionVO position, AuditTimestamps audit, UUID portfolioId) {
+        super(new DomainNotification());
+        this.assetId = assetId;
+        this.portfolioId = portfolioId;
+        this.position = position;
+        this.audit = audit;
+    }
 
     public void buy(BigDecimal quantity, BigDecimal averagePurchasePrice) {
         this.position.buy(quantity, averagePurchasePrice);
@@ -64,6 +74,17 @@ public class PortfolioItem extends BaseEntity implements IAggregate {
         return this.audit.getUpdatedAt();
     }
 
+    public AuditTimestamps getAudit() {
+        return audit;
+    }
+
+    public UUID getPortfolioId() {
+        return portfolioId;
+    }
+
+    public AssetPositionVO getPosition() {
+        return position;
+    }
 
     @Override
     protected void validate() {

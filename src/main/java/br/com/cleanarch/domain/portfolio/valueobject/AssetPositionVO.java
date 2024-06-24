@@ -19,6 +19,12 @@ public class AssetPositionVO extends BaseEntity implements IValueObject {
         this.averagePurchasePrice = new BigDecimal(0);
     }
 
+    public AssetPositionVO(BigDecimal quantity, BigDecimal price) {
+        super(new DomainNotification());
+        this.quantity = quantity;
+        this.averagePurchasePrice = price;
+    }
+
     public void buy(BigDecimal quantity, BigDecimal averagePurchasePrice) {
         if (quantityGreaterThanZero(quantity) && priceGreaterThanZero(averagePurchasePrice)) {
             calculateAveragePurchasePrice(quantity, averagePurchasePrice);
