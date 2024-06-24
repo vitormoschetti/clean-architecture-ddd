@@ -1,6 +1,5 @@
 package br.com.cleanarch.domain.customer.valueobject;
 
-import br.com.cleanarch.domain.customer.valueobject.AddressVO;
 import br.com.cleanarch.domain.shared.notification.DomainNotificationError;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
