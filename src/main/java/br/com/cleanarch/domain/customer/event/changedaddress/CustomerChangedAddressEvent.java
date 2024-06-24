@@ -13,11 +13,11 @@ public class CustomerChangedAddressEvent implements IEvent<CustomerChangedAddres
     private final CustomerChangedAddressRecord payload;
     private final Instant instantCreated;
 
-    public CustomerChangedAddressEvent(final CustomerChangedAddressRecord payload) {
+    public CustomerChangedAddressEvent(UUID tenantId) {
         this.eventName = this.getClass().getSimpleName().toLowerCase();
         this.traceId = UUID.randomUUID();
         this.instantCreated = Instant.now().atOffset(ZoneOffset.UTC).toInstant();
-        this.payload = payload;
+        this.payload = new CustomerChangedAddressRecord(tenantId);
     }
 
     @Override

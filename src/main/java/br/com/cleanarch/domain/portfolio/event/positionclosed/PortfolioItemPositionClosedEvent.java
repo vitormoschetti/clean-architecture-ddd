@@ -13,11 +13,11 @@ public class PortfolioItemPositionClosedEvent implements IEvent<PortfolioItemPos
     private final Instant created;
     private final PortfolioItemPositionClosedRecord payload;
 
-    public PortfolioItemPositionClosedEvent(PortfolioItemPositionClosedRecord payload) {
+    public PortfolioItemPositionClosedEvent(Long assetId, Instant sellAt) {
         this.eventName = this.getClass().getSimpleName();
         this.traceId = UUID.randomUUID();
         this.created = Instant.now().atOffset(ZoneOffset.UTC).toInstant();
-        this.payload = payload;
+        this.payload = new PortfolioItemPositionClosedRecord(assetId, sellAt);
     }
 
     @Override

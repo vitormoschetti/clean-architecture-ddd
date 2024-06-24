@@ -2,6 +2,7 @@ package br.com.cleanarch.domain.portfolio.event.sell;
 
 import br.com.cleanarch.domain.shared.event.IEvent;
 
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.time.ZoneOffset;
 import java.util.UUID;
@@ -13,11 +14,11 @@ public class PortfolioItemSellEvent implements IEvent<PortfolioItemSellRecord> {
     private final Instant created;
     private final PortfolioItemSellRecord payload;
 
-    public PortfolioItemSellEvent(PortfolioItemSellRecord payload) {
+    public PortfolioItemSellEvent(Long assetId, BigDecimal price, BigDecimal quantity, Instant sellAt) {
         this.eventName = this.getClass().getSimpleName();
         this.traceId = UUID.randomUUID();
         this.created = Instant.now().atOffset(ZoneOffset.UTC).toInstant();
-        this.payload = payload;
+        this.payload = new PortfolioItemSellRecord(assetId, price, quantity, sellAt);
     }
 
     @Override

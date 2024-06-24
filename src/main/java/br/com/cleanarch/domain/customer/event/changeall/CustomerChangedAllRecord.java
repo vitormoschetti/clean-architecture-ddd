@@ -5,5 +5,5 @@ import br.com.cleanarch.domain.shared.event.IRecord;
 
 import java.util.UUID;
 
-public record CustomerChangedAllRecord(UUID tenantId, String name, AddressVO address) implements IRecord {
+public record CustomerChangedAllRecord(UUID tenantId) implements IRecord {
 }

@@ -13,11 +13,11 @@ public class CustomerChangedAllEvent implements IEvent<CustomerChangedAllRecord>
     private final CustomerChangedAllRecord payload;
     private final Instant instantCreated;
 
-    public CustomerChangedAllEvent(final CustomerChangedAllRecord payload) {
+    public CustomerChangedAllEvent(UUID tenantId) {
         this.eventName = this.getClass().getSimpleName().toLowerCase();
         this.traceId = UUID.randomUUID();
         this.instantCreated = Instant.now().atOffset(ZoneOffset.UTC).toInstant();
-        this.payload = payload;
+        this.payload = new CustomerChangedAllRecord(tenantId);
     }
 
     @Override

@@ -1,6 +1,12 @@
 package br.com.cleanarch.domain.customer.service;
 
 import br.com.cleanarch.domain.customer.entity.Customer;
+import br.com.cleanarch.domain.customer.event.changeall.CustomerChangedAllDispatcher;
+import br.com.cleanarch.domain.customer.event.changeall.CustomerChangedAllEvent;
+import br.com.cleanarch.domain.customer.event.changedaddress.CustomerChangedAddressDispatcher;
+import br.com.cleanarch.domain.customer.event.changedaddress.CustomerChangedAddressEvent;
+import br.com.cleanarch.domain.customer.event.created.CustomerCreatedDispatcher;
+import br.com.cleanarch.domain.customer.event.created.CustomerCreatedEvent;
 import br.com.cleanarch.domain.customer.exception.CustomerNotFoundException;
 import br.com.cleanarch.domain.customer.repository.ICustomerRepository;
 import br.com.cleanarch.domain.shared.entity.exception.DomainException;
@@ -17,9 +23,10 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class CustomerService implements ICustomerService {
 
-    //TODO implementar os eventos de customer service
-
     private final ICustomerRepository repository;
+    private final CustomerChangedAllDispatcher customerChangedAllDispatcher;
+    private final CustomerChangedAddressDispatcher customerChangedAddressDispatcher;
+    private final CustomerCreatedDispatcher customerCreatedDispatcher;
 
     public Customer create(final String name, final String street,
                            final String city, final String state,
@@ -31,6 +38,8 @@ public class CustomerService implements ICustomerService {
         verifyCustomerIsValid(customer);
 
         this.repository.create(customer);
+
+        customerCreatedDispatcher.dispatch(new CustomerCreatedEvent(customer.getTenantId()));
 
         return customer;
     }
@@ -46,6 +55,8 @@ public class CustomerService implements ICustomerService {
         customer.changeAddress(street, state, city, zipCode);
 
         verifyCustomerIsValid(customer);
+
+        customerChangedAddressDispatcher.dispatch(new CustomerChangedAddressEvent(customer.getTenantId()));
 
         this.repository.update(customer);
     }
@@ -73,6 +84,8 @@ public class CustomerService implements ICustomerService {
         verifyCustomerIsValid(customer);
 
         this.repository.update(customer);
+
+        customerChangedAllDispatcher.dispatch(new CustomerChangedAllEvent(customer.getTenantId()));
 
         return customer;
 
