@@ -6,10 +6,8 @@ import br.com.cleanarch.application.shared.usecase.IUseCaseWithParam;
 import br.com.cleanarch.domain.customer.service.ICustomerService;
 import br.com.cleanarch.domain.portfolio.service.IPortfolioService;
 import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-@Slf4j
 @Service
 @AllArgsConstructor
 public class CustomerCreateUseCase implements IUseCaseWithParam<CreateCustomerInput, CreateUserOutput> {

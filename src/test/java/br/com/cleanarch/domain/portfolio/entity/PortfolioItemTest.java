@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -14,7 +15,7 @@ class PortfolioItemTest {
     void positionZeroWhenItemCreated() {
 
         //scenario
-        final var item = new PortfolioItem(1L);
+        final var item = new PortfolioItem(1L, UUID.randomUUID());
 
         //validation
         assertEquals(1L, item.getAssetId());
@@ -32,7 +33,7 @@ class PortfolioItemTest {
     void buyQuantity10Price10AndTotalInvested100() {
 
         //scenario
-        final var item = new PortfolioItem(1L);
+        final var item = new PortfolioItem(1L, UUID.randomUUID());
 
         //execution
         item.buy(BigDecimal.TEN, BigDecimal.TEN);
@@ -53,7 +54,7 @@ class PortfolioItemTest {
     void buyQuantity10Price10AndTotalInvested100AndSell10() {
 
         //scenario
-        final var item = new PortfolioItem(1L);
+        final var item = new PortfolioItem(1L, UUID.randomUUID());
 
         //execution
         item.buy(BigDecimal.TEN, BigDecimal.TEN);
