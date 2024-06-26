@@ -1,4 +1,4 @@
-package br.com.cleanarch.application.util;
+package br.com.cleanarch.infra.kafka;
 
 import br.com.cleanarch.domain.shared.event.IEvent;
 import lombok.AllArgsConstructor;

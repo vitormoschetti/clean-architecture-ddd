@@ -1,6 +1,6 @@
 package br.com.cleanarch.application.customer.handler;
 
-import br.com.cleanarch.application.util.KafkaUtil;
+import br.com.cleanarch.infra.kafka.KafkaUtil;
 import br.com.cleanarch.domain.customer.event.created.CustomerCreatedDispatcher;
 import br.com.cleanarch.domain.customer.event.created.CustomerCreatedEvent;
 import lombok.RequiredArgsConstructor;
