@@ -5,13 +5,13 @@ import java.util.UUID;
 
 public interface IEvent<T extends IRecord> {
 
-    String eventName();
+    String getEventName();
 
-    UUID traceId();
+    UUID getTraceId();
 
-    Instant instantCreated();
+    Instant getInstantCreated();
 
-    T payload();
+    T getPayload();
 
 
 }

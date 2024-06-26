@@ -1,8 +1,8 @@
 package br.com.cleanarch.application.customer.handler;
 
-import br.com.cleanarch.infra.kafka.KafkaUtil;
 import br.com.cleanarch.domain.customer.event.created.CustomerCreatedDispatcher;
 import br.com.cleanarch.domain.customer.event.created.CustomerCreatedEvent;
+import br.com.cleanarch.infra.kafka.KafkaUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,9 +22,9 @@ public class CustomerCreatedHandler implements CustomerCreatedDispatcher {
 
     @Override
     public void dispatch(CustomerCreatedEvent event) {
-        log.info("Receive event={} traceId={} createAt={}", event.eventName(), event.traceId(), event.instantCreated());
-        log.info("Customer {} created", event.payload().tenantId());
+        log.info("Receive event={} traceId={} createAt={}", event.getEventName(), event.getTraceId(), event.getInstantCreated());
+        log.info("Customer {} created", event.getPayload().tenantId());
 
-        kafkaUtil.send(event.traceId(), event, topic);
+        kafkaUtil.send(event.getTraceId(), event, topic);
     }
 }

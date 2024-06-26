@@ -22,22 +22,22 @@ public class PortfolioItemBuyEvent implements IEvent<PortfolioItemBuyRecord> {
     }
 
     @Override
-    public String eventName() {
+    public String getEventName() {
         return this.eventName;
     }
 
     @Override
-    public UUID traceId() {
+    public UUID getTraceId() {
         return this.traceId;
     }
 
     @Override
-    public Instant instantCreated() {
+    public Instant getInstantCreated() {
         return this.created;
     }
 
     @Override
-    public PortfolioItemBuyRecord payload() {
+    public PortfolioItemBuyRecord getPayload() {
         return this.payload;
     }
 }

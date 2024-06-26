@@ -21,22 +21,22 @@ public class PortfolioItemPositionClosedEvent implements IEvent<PortfolioItemPos
     }
 
     @Override
-    public String eventName() {
+    public String getEventName() {
         return this.eventName;
     }
 
     @Override
-    public UUID traceId() {
+    public UUID getTraceId() {
         return this.traceId;
     }
 
     @Override
-    public Instant instantCreated() {
+    public Instant getInstantCreated() {
         return this.created;
     }
 
     @Override
-    public PortfolioItemPositionClosedRecord payload() {
+    public PortfolioItemPositionClosedRecord getPayload() {
         return this.payload;
     }
 }

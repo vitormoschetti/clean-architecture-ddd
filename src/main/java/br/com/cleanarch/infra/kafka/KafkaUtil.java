@@ -21,9 +21,9 @@ public class KafkaUtil<K, V extends IEvent> implements Serializable {
         this.template.send(topic, key, value)
                 .whenComplete((_, error) -> {
                     if (Objects.nonNull(error)) {
-                        log.error("Error while sending message={} with payload={}", value.eventName(), value.payload(), error);
+                        log.error("Error while sending message={} with payload={}", value.getEventName(), value.getPayload(), error);
                     } else {
-                        log.info("Successfully sent message={}", value.eventName());
+                        log.info("Successfully sent message={}", value.getEventName());
                     }
                 });
 

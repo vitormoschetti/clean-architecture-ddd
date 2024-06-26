@@ -21,22 +21,22 @@ public class CustomerChangedAllEvent implements IEvent<CustomerChangedAllRecord>
     }
 
     @Override
-    public String eventName() {
+    public String getEventName() {
         return this.eventName;
     }
 
     @Override
-    public UUID traceId() {
+    public UUID getTraceId() {
         return this.traceId;
     }
 
     @Override
-    public Instant instantCreated() {
+    public Instant getInstantCreated() {
         return this.instantCreated;
     }
 
     @Override
-    public CustomerChangedAllRecord payload() {
+    public CustomerChangedAllRecord getPayload() {
         return this.payload;
     }
 }
